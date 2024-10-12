@@ -42,14 +42,14 @@
             $data = mysqli_fetch_assoc($query);
             ?>
             <h3><?php echo $data['numero']; ?></h3>
-            <p>Creación de productos</p>
+            <p>Productos creados<br>&nbsp;</p>
           </div>
           <div class="icon">
             <i class="fa fa-folder"></i>
           </div>
           <?php  
           if ($_SESSION['permisos_acceso']!='gerente') { ?>
-            <a href="?module=form_medicines&form=add" class="small-box-footer" title="Agregar" data-toggle="tooltip"><i class="fa fa-plus"></i></a>
+            <a href="#" class="small-box-footer" data-toggle="tooltip">&nbsp;</a>
           <?php
           } else { ?>
             <a class="small-box-footer"><i class="fa"></i></a>
@@ -72,14 +72,14 @@
             $data = mysqli_fetch_assoc($query);
             ?>
             <h3><?php echo $data['numero']; ?></h3>
-            <p>datos de entrada de Productos</p>
+            <p>Movimientos realizados <br>(Entrada/Salida)</p>
           </div>
           <div class="icon">
             <i class="fa fa-sign-in"></i>
           </div>
           <?php  
           if ($_SESSION['permisos_acceso']!='gerente') { ?>
-            <a href="?module=form_medicines_transaction&form=add" class="small-box-footer" title="Agregar" data-toggle="tooltip"><i class="fa fa-plus"></i></a>
+            <a href="#" class="small-box-footer" data-toggle="tooltip">&nbsp;</a>
           <?php
           } else { ?>
             <a class="small-box-footer"><i class="fa"></i></a>
@@ -101,18 +101,48 @@
             $data = mysqli_fetch_assoc($query);
             ?>
             <h3><?php echo $data['numero']; ?></h3>
-            <p>Stock Productos</p>
+            <p>Productos con stock<br>&nbsp;</p>
           </div>
           <div class="icon">
             <i class="fa fa-file-text-o"></i>
           </div>
-          <a href="?module=stock_inventory" class="small-box-footer" title="Imprimir" data-toggle="tooltip"><i class="fa fa-print"></i></a>
+          <a href="#" class="small-box-footer" data-toggle="tooltip">&nbsp;</a>
         </div>
       </div><!-- ./col -->
 
     </div><!-- /.row -->
 
     <div class="row" style="display: flex; justify-content: space-evenly; margin-top: 12px;">
+
+      <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div style="background-color:#6256CA;color:#fff" class="small-box">
+          <div class="inner" style="padding-bottom: 60px;">
+            <?php   
+   
+            $query = mysqli_query($mysqli, "SELECT COUNT(codigo_transaccion) as numero FROM transaccion_medicamentos")
+                                            or die('Error '.mysqli_error($mysqli));
+
+
+            $data = mysqli_fetch_assoc($query);
+            ?>
+            <h4>Gestionar <br>de Stock</h4>
+          </div>
+          <div class="icon">
+          <i class="fa fa-table" aria-hidden="true"></i>
+          </div>
+          <?php  
+          if ($_SESSION['permisos_acceso']!='gerente') { ?>
+            <a href="?module=medicines_transaction" class="small-box-footer" title="Agregar" data-toggle="tooltip"><i class="fa fa-plus"></i></a>
+          <?php
+          } else { ?>
+            <a class="small-box-footer"><i class="fa"></i></a>
+          <?php
+          }
+          ?>
+        </div>
+      </div><!-- ./col -->
+
       <div class="col-lg-3 col-xs-6">
         <!-- small box -->
         <div style="background-color:#F3C623;color:#fff" class="small-box">
@@ -133,35 +163,6 @@
           <?php  
           if ($_SESSION['permisos_acceso']!='gerente') { ?>
             <a href="?module=form_medicines&form=add" class="small-box-footer" title="Agregar" data-toggle="tooltip"><i class="fa fa-plus"></i></a>
-          <?php
-          } else { ?>
-            <a class="small-box-footer"><i class="fa"></i></a>
-          <?php
-          }
-          ?>
-        </div>
-      </div><!-- ./col -->
-
-      <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div style="background-color:#6256CA;color:#fff" class="small-box">
-          <div class="inner" style="padding-bottom: 60px;">
-            <?php   
-   
-            $query = mysqli_query($mysqli, "SELECT COUNT(codigo_transaccion) as numero FROM transaccion_medicamentos")
-                                            or die('Error '.mysqli_error($mysqli));
-
-
-            $data = mysqli_fetch_assoc($query);
-            ?>
-            <h4>Gestionar <br>de Stok</h4>
-          </div>
-          <div class="icon">
-          <i class="fa fa-table" aria-hidden="true"></i>
-          </div>
-          <?php  
-          if ($_SESSION['permisos_acceso']!='gerente') { ?>
-            <a href="?module=medicines_transaction" class="small-box-footer" title="Agregar" data-toggle="tooltip"><i class="fa fa-plus"></i></a>
           <?php
           } else { ?>
             <a class="small-box-footer"><i class="fa"></i></a>
