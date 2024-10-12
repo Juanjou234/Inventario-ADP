@@ -1,3 +1,9 @@
+<style>
+  h4 {
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 500;
+  }
+</style>  
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
@@ -22,7 +28,7 @@
     </div>
    
     <!-- Small boxes (Stat box) -->
-    <div class="row">
+    <div class="row" style="display: flex; justify-content: space-evenly; margin-top: 10px;">
       <div class="col-lg-3 col-xs-6">
         <!-- small box -->
         <div style="background-color:#00c0ef;color:#fff" class="small-box">
@@ -104,25 +110,87 @@
         </div>
       </div><!-- ./col -->
 
+    </div><!-- /.row -->
+
+    <div class="row" style="display: flex; justify-content: space-evenly; margin-top: 12px;">
       <div class="col-lg-3 col-xs-6">
         <!-- small box -->
-        <div style="background-color:#dd4b39;color:#fff" class="small-box">
-          <div class="inner">
+        <div style="background-color:#F3C623;color:#fff" class="small-box">
+          <div class="inner" style="padding-bottom: 60px;">
+            <?php  
+          
+            $query = mysqli_query($mysqli, "SELECT COUNT(codigo) as numero FROM medicamentos")
+                                            or die('Error '.mysqli_error($mysqli));
+
+           
+            $data = mysqli_fetch_assoc($query);
+            ?>
+            <h4>Crear <br>Producto</h4>
+          </div>
+          <div class="icon" >
+            <i class="fa fa-plus"></i>
+          </div>
+          <?php  
+          if ($_SESSION['permisos_acceso']!='gerente') { ?>
+            <a href="?module=form_medicines&form=add" class="small-box-footer" title="Agregar" data-toggle="tooltip"><i class="fa fa-plus"></i></a>
+          <?php
+          } else { ?>
+            <a class="small-box-footer"><i class="fa"></i></a>
+          <?php
+          }
+          ?>
+        </div>
+      </div><!-- ./col -->
+
+      <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div style="background-color:#6256CA;color:#fff" class="small-box">
+          <div class="inner" style="padding-bottom: 60px;">
             <?php   
-  
+   
             $query = mysqli_query($mysqli, "SELECT COUNT(codigo_transaccion) as numero FROM transaccion_medicamentos")
-                                            or die('Error: '.mysqli_error($mysqli));
+                                            or die('Error '.mysqli_error($mysqli));
+
 
             $data = mysqli_fetch_assoc($query);
             ?>
-            <h3><?php echo $data['numero']; ?></h3>
-            <p>Registros de Productos</p>
+            <h4>Gestionar <br>de Stok</h4>
           </div>
           <div class="icon">
-            <i class="fa fa-clone"></i>
+          <i class="fa fa-table" aria-hidden="true"></i>
           </div>
-          <a href="?module=stock_report" class="small-box-footer" title="Imprimir" data-toggle="tooltip"><i class="fa fa-print"></i></a>
+          <?php  
+          if ($_SESSION['permisos_acceso']!='gerente') { ?>
+            <a href="?module=medicines_transaction" class="small-box-footer" title="Agregar" data-toggle="tooltip"><i class="fa fa-plus"></i></a>
+          <?php
+          } else { ?>
+            <a class="small-box-footer"><i class="fa"></i></a>
+          <?php
+          }
+          ?>
         </div>
       </div><!-- ./col -->
+
+      <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div style="background-color:#229799;color:#fff" class="small-box">
+          <div class="inner" style="padding-bottom: 60px;">
+            <?php  
+  
+            $query = mysqli_query($mysqli, "SELECT COUNT(codigo) as numero FROM medicamentos")
+                                            or die('Error'.mysqli_error($mysqli));
+
+            $data = mysqli_fetch_assoc($query);
+            ?>
+            <h4>Historial <br>de Productos</h4>
+          </div>
+          <div class="icon">
+          <i class="fa fa-file-text" aria-hidden="true"></i>
+
+          </div>
+          <a href="?module=stock_inventory" class="small-box-footer" title="Imprimir" data-toggle="tooltip"><i class="fa fa-print"></i></a>
+        </div>
+      </div><!-- ./col -->
+
     </div><!-- /.row -->
   </section><!-- /.content -->
